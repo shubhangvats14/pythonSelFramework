@@ -8,3 +8,7 @@ and click() can be performed in the actual test
 
 - By using Page Objects concept, we need to define an object for each class from where we are returning page elements --
 To overcome this, we can use the connections between objects and can just define child objects inside the parent one
+
+- If there are any common utilities, which can be used at more than one place in our code, we should try to generalize it
+e.g., the explicit wait code can be generalized and can be added to the Utilities > BaseClass, as our every Test Class
+will inherit BaseClass

@@ -34,8 +34,9 @@ class TestOne(BaseClass):  # using inheritance, we are inheriting the fixture pr
         confirm_page.get_country_field().send_keys("Ind")
         # self.driver.find_element(By.ID, "country")
 
-        wait = WebDriverWait(self.driver, 10)
-        wait.until(expected_conditions.presence_of_element_located((By.LINK_TEXT, "India")))
+        # wait = WebDriverWait(self.driver, 10) -- Moved to BaseClass
+        # wait.until(expected_conditions.presence_of_element_located((By.LINK_TEXT, "India"))) -- Moved to BaseClass
+        self.verify_link_presence("India")
 
         confirm_page.get_country_name().click()
         # self.driver.find_element(By.LINK_TEXT, "India").click()
