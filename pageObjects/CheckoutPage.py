@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 
+from pageObjects.ConfirmPage import ConfirmPage
+
 
 class CheckoutPage:
     card_element = (By.XPATH, "//div[@class='card h-100']")
@@ -22,5 +24,7 @@ class CheckoutPage:
         return self.driver.find_element(*CheckoutPage.checkout_btn)
 
     def get_sec_checkout_btn(self):
-        return self.driver.find_element(*CheckoutPage.sec_checkout_btn)
+        self.driver.find_element(*CheckoutPage.sec_checkout_btn).click()
+        confirm_page = ConfirmPage(self.driver)
+        return confirm_page
 

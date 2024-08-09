@@ -13,8 +13,8 @@ class TestOne(BaseClass):  # using inheritance, we are inheriting the fixture pr
     def test_e2e(self):  # here self is already loaded with the driver variable which was defined in the setup fixture,
         # so we don't need to add the setup parameter in this method
         homepage = HomePage(self.driver)  # using self.driver as the driver is present within the class
-        homepage.shop_items().click()  # self.driver.find_element(By.LINK_TEXT, "Shop").click()
-        checkoutpage = CheckoutPage(self.driver)
+        # homepage.shop_items().click()  # self.driver.find_element(By.LINK_TEXT, "Shop").click()
+        checkoutpage = homepage.shop_items()
         Cards = checkoutpage.get_card_elements()  # self.driver.find_elements(By.XPATH, "//div[@class='card h-100']")
         i = -1
         for card in Cards:
@@ -26,11 +26,14 @@ class TestOne(BaseClass):  # using inheritance, we are inheriting the fixture pr
         checkoutpage.get_checkout_btn().click()
         # self.driver.find_element(By.XPATH, "//a[@class='nav-link btn btn-primary']").click()
 
-        checkoutpage.get_sec_checkout_btn().click()
+        # checkoutpage.get_sec_checkout_btn().click() -- As now click is handled in the get_sec_checkout_btn()
         # self.driver.find_element(By.XPATH, "//button[@class='btn btn-success']").click()
-        self.driver.find_element(By.ID, "country").send_keys("Ind")
 
-        confirm_page = ConfirmPage(self.driver)
+        # confirm_page = ConfirmPage(self.driver)
+        confirm_page = checkoutpage.get_sec_checkout_btn()
+        confirm_page.get_country_field().send_keys("Ind")
+        # self.driver.find_element(By.ID, "country")
+
         wait = WebDriverWait(self.driver, 10)
         wait.until(expected_conditions.presence_of_element_located((By.LINK_TEXT, "India")))
 

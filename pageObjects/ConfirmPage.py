@@ -2,12 +2,16 @@ from selenium.webdriver.common.by import By
 
 
 class ConfirmPage:
+    country_field = (By.ID, "country")
     country_name = (By.LINK_TEXT, "India")
     purchase_btn = (By.XPATH, "//input[@class='btn btn-success btn-lg']")
     success_msg = (By.XPATH, "//div[@class='alert alert-success alert-dismissible']")
 
     def __init__(self, driver):
         self.driver = driver
+
+    def get_country_field(self):
+        return self.driver.find_element(*ConfirmPage.country_field)
 
     def get_country_name(self):
         return self.driver.find_element(*ConfirmPage.country_name)

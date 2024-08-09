@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 
+from pageObjects.CheckoutPage import CheckoutPage
+
 
 class HomePage:
     shop = (By.LINK_TEXT, "Shop")  # this is the shop locator
@@ -10,7 +12,10 @@ class HomePage:
         # during object creation
 
     def shop_items(self):
-        return self.driver.find_element(*HomePage.shop)  # * unpacks the tuple
+        self.driver.find_element(*HomePage.shop).click()
+        checkoutpage = CheckoutPage(self.driver)
+        return checkoutpage
+        # * unpacks the tuple
         # driver.find_element(By.LINK_TEXT, "Shop") -- This is same as the above step, just used tuple for the locator
         # which is a class variable
         # returning it so that we can catch this in the test file
