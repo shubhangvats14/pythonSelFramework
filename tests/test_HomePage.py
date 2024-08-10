@@ -4,6 +4,7 @@ from selenium.webdriver.support.select import Select
 
 from pageObjects.HomePage import HomePage
 from utilities.BaseClass import BaseClass
+from TestData.HomePageData import HomePageData
 
 
 @pytest.mark.usefixtures("form_data")
@@ -26,8 +27,6 @@ class TestHomePage(BaseClass):
     # defining fixture in the same file as this will be used by this case only
     # @pytest.fixture(params=[("Chrome", "Shubhang@fhg.com", "Vats"), ("Firefox", "Rahul@ghg.com", "Shetty"),
     #                         ("IE", "Vijay@ghvh.com", "Rana")]) -- using Tuples (disadvantage - key:value not present)
-    @pytest.fixture(params=[{"name": "Chrome", "email": "Shubhang@fhg.com", "password": "Vats"},
-                            {"name": "Firefox", "email": "Rahul@ghg.com", "password": "Shetty"},
-                            {"name": "IE", "email": "Vijay@ghvh.com", "password": "Rana"}])
+    @pytest.fixture(params=HomePageData.home_page_data)
     def form_data(self, request):
         return request.param
