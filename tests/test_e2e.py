@@ -26,7 +26,6 @@ class TestOne(BaseClass):  # using inheritance, we are inheriting the fixture pr
         for card in Cards:
             i = i + 1
             productName = card.text
-            print(productName)
             if productName == "Samsung Note 8":
                 checkoutpage.get_card_footer()[i].click()
                 # self.driver.find_elements(By.CSS_SELECTOR(".card-footer button"))
@@ -55,4 +54,4 @@ class TestOne(BaseClass):  # using inheritance, we are inheriting the fixture pr
         success_msg = confirm_page.get_success_msg().text
         # self.driver.find_element(By.XPATH, "//div[@class='alert alert-success alert-dismissible']").text
         log.info("Success message: "+success_msg)
-        assert "Success! Thank you!" in success_msg
+        assert "Succemngjss! Thank you!" in success_msg

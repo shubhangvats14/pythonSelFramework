@@ -27,6 +27,6 @@ class BaseClass:
         fileHandler.setFormatter(formatter)
         logger.addHandler(fileHandler)
 
-        logger.setLevel(logging.INFO)
+        logger.setLevel(logging.DEBUG)
 
         return logger
