@@ -10,11 +10,14 @@ from TestData.HomePageData import HomePageData
 @pytest.mark.usefixtures("form_data")
 class TestHomePage(BaseClass):
     def test_form_submission(self, form_data):
+        log = self.get_logger()
         homepage_obj = HomePage(self.driver)
+
 
         homepage_obj.get_name().send_keys(form_data["name"])
         homepage_obj.get_email().send_keys(form_data["email"])
         homepage_obj.get_password().send_keys(form_data["password"])
+        log.info("First Name is:" + form_data["name"] + " Email is: "+form_data["email"])
 
         # generalized the drop-down select code, now defined in BaseClass
         self.select_dd_value(homepage_obj.get_gender(), "Male")
