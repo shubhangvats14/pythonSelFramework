@@ -11,9 +11,9 @@ class TestHomePage(BaseClass):
     def test_form_submission(self, form_data):
         homepage_obj = HomePage(self.driver)
 
-        homepage_obj.get_name().send_keys(form_data[0])
-        homepage_obj.get_email().send_keys(form_data[1])
-        homepage_obj.get_password().send_keys(form_data[2])
+        homepage_obj.get_name().send_keys(form_data["name"])
+        homepage_obj.get_email().send_keys(form_data["email"])
+        homepage_obj.get_password().send_keys(form_data["password"])
 
         # generalized the drop-down select code, now defined in BaseClass
         self.select_dd_value(homepage_obj.get_gender(), "Male")
@@ -24,7 +24,10 @@ class TestHomePage(BaseClass):
         self.driver.refresh()
 
     # defining fixture in the same file as this will be used by this case only
-    @pytest.fixture(params=[("Chrome", "Shubhang@fhg.com", "Vats"), ("Firefox", "Rahul@ghg.com", "Shetty"),
-                            ("IE", "Vijay@ghvh.com", "Rana")])
+    # @pytest.fixture(params=[("Chrome", "Shubhang@fhg.com", "Vats"), ("Firefox", "Rahul@ghg.com", "Shetty"),
+    #                         ("IE", "Vijay@ghvh.com", "Rana")]) -- using Tuples (disadvantage - key:value not present)
+    @pytest.fixture(params=[{"name": "Chrome", "email": "Shubhang@fhg.com", "password": "Vats"},
+                            {"name": "Firefox", "email": "Rahul@ghg.com", "password": "Shetty"},
+                            {"name": "IE", "email": "Vijay@ghvh.com", "password": "Rana"}])
     def form_data(self, request):
         return request.param
