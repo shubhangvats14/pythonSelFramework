@@ -42,7 +42,7 @@ def setup(request):
 
 
 # this is a copied and pasted code
-@pytest.mark.hookwrapper
+@pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item):
     """
         Extends the PyTest Plugin to take and embed screenshot in html report, whenever test fails.
