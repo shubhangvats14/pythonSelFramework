@@ -13,11 +13,10 @@ class TestHomePage(BaseClass):
         log = self.get_logger()
         homepage_obj = HomePage(self.driver)
 
-
-        homepage_obj.get_name().send_keys(form_data["name"])
+        homepage_obj.get_name().send_keys(form_data["first_name"])
         homepage_obj.get_email().send_keys(form_data["email"])
         homepage_obj.get_password().send_keys(form_data["password"])
-        log.info("First Name is:" + form_data["name"] + " Email is: "+form_data["email"])
+        log.info("First Name is:" + form_data["first_name"] + " Email is: " + form_data["email"])
 
         # generalized the drop-down select code, now defined in BaseClass
         self.select_dd_value(homepage_obj.get_gender(), "Male")
@@ -30,6 +29,6 @@ class TestHomePage(BaseClass):
     # defining fixture in the same file as this will be used by this case only
     # @pytest.fixture(params=[("Chrome", "Shubhang@fhg.com", "Vats"), ("Firefox", "Rahul@ghg.com", "Shetty"),
     #                         ("IE", "Vijay@ghvh.com", "Rana")]) -- using Tuples (disadvantage - key:value not present)
-    @pytest.fixture(params=HomePageData.home_page_data)
+    @pytest.fixture(params=HomePageData.getTestData("test_case4"))
     def form_data(self, request):
         return request.param

@@ -12,3 +12,8 @@ To overcome this, we can use the connections between objects and can just define
 - If there are any common utilities, which can be used at more than one place in our code, we should try to generalize it
 e.g., the explicit wait code can be generalized and can be added to the Utilities > BaseClass, as our every Test Class
 will inherit BaseClass
+
+- @staticmethod -- This needs to be added before method definition
+  static methods can be called without creating class object,it can directly be called
+  with ClassName., so for a class method which is static, we won't require to create an object for this Class to call.
+  self is also not needed for static methods as on of the parameters
