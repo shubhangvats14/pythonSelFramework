@@ -17,6 +17,8 @@ print(sheet['B5'].value)  # simpler way to get a cell value
 sheet['B5'].value = "New_value"  # simpler way to write a cell value
 print(sheet['B5'].value)
 
+book.save("TestData.xlsx")
+
 # To print all values from sheet in same format
 print("\n")
 for r in range(1, sheet.max_row + 1):  # iterating rows

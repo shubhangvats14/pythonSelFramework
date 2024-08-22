@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+import openpyxl
 
 
 chrome_options = Options()
@@ -13,9 +14,28 @@ service_obj = Service(r"C:\Users\shubhangvats\OneDrive - Hexaview Technologies\D
 driver = webdriver.Chrome(service=service_obj, options=chrome_options)
 driver.get("https://rahulshettyacademy.com/upload-download-test")
 driver.implicitly_wait(5)
+
+# ###### DOWNLOADING excel File
 driver.find_element(By.ID, "downloadButton").click()
+
+# ##### EDITING the downloaded Excel file
+file_path = "C:/Users/shubhangvats/OneDrive - Hexaview Technologies/Downloads/download.xlsx"
+book = openpyxl.load_workbook(file_path)
+sheet = book.active
+
+for i in range(1, sheet.max_row+1):
+    for j in range(1, sheet.max_column+1):
+        if sheet.cell(row=i, column=j).value == "Apple":
+            sheet.cell(row=i, column=4).value = "999"
+        else:
+            continue
+book.save(file_path)
+
+# ##### UPLOADING the edited Excel file
 upload_btn = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
 upload_btn.send_keys(r"C:\Users\shubhangvats\OneDrive - Hexaview Technologies\Downloads\download.xlsx")
+# if the locator has input tag with type attribute = file, then we can send the file location using sen_keys method
+# and that will upload the file
 
 toast_locator = (By.CSS_SELECTOR, ".Toastify__toast-body div:nth-child(2)")
 column_name = 'Price'
