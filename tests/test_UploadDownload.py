@@ -19,9 +19,10 @@ driver.find_element(By.ID, "downloadButton").click()
 
 # ##### EDITING the downloaded Excel file
 file_path = "C:/Users/shubhangvats/OneDrive - Hexaview Technologies/Downloads/download.xlsx"
+new_value = "999"
 
 
-def update_cell_value(file_p, item_name, column_n, new_value):
+def update_cell_value(file_p, item_name, column_n, n_value):
     Dict = {}
     book = openpyxl.load_workbook(file_path)
     sheet = book.active
@@ -36,12 +37,12 @@ def update_cell_value(file_p, item_name, column_n, new_value):
                 Dict["row"] = i
             else:
                 continue
-    sheet.cell(row=Dict["row"], column=Dict["col"]).value = new_value
+    sheet.cell(row=Dict["row"], column=Dict["col"]).value = n_value
     book.save(file_p)
     book.close()
 
 
-update_cell_value(file_path, "Apple", "price", "999")
+update_cell_value(file_path, "Apple", "price", new_value)
 
 # ##### UPLOADING the edited Excel file
 upload_btn = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
@@ -63,6 +64,6 @@ actual_price = driver.find_element(By.XPATH, "//div[text()= '" + fruit + "']/par
 # Here we are using the parent traversal, as we traversed from Apple to the parent div(s) togs
 # Now, using the fruit name and the column index, we brought the value on the cell
 
-print(actual_price)
+assert actual_price == new_value
 
 driver.close()
