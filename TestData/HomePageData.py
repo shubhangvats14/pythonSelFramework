@@ -10,7 +10,8 @@ class HomePageData:
     @staticmethod
     def getTestData(test_case_name):  # test_case_name will come from our test
         dict_data = {}
-        book = openpyxl.load_workbook(r"C:\Users\shubhangvats\PycharmProjects\pythonSelFramework\TestData\TestData.xlsx")
+        book = openpyxl.load_workbook(r"C:\Users\shubhangvats\PycharmProjects\pythonSelFramework"
+                                      r"\TestData\TestData.xlsx")
         sheet = book.active
         for r in range(1, sheet.max_row + 1):  # iterating rows
             if sheet.cell(row=r, column=1).value == test_case_name:  # for getting data of just test_case3
