@@ -20,20 +20,27 @@ driver.find_element(By.ID, "downloadButton").click()
 
 # ##### EDITING the downloaded Excel file
 file_path = "C:/Users/shubhangvats/OneDrive - Hexaview Technologies/Downloads/download.xlsx"
+Dict = {}
 book = openpyxl.load_workbook(file_path)
 sheet = book.active
+
+# getting Price column index
+for c in range(1, sheet.max_column+1):
+    if sheet.cell(row=1, column=c).value == "price":
+        Dict["col"] = c
 
 for i in range(1, sheet.max_row+1):
     for j in range(1, sheet.max_column+1):
         if sheet.cell(row=i, column=j).value == "Apple":
-            sheet.cell(row=i, column=4).value = "999"
+            Dict["row"] = i
         else:
             continue
+sheet.cell(row=Dict["row"], column=Dict["col"]).value = "999"
 book.save(file_path)
 
 # ##### UPLOADING the edited Excel file
 upload_btn = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
-upload_btn.send_keys(r"C:\Users\shubhangvats\OneDrive - Hexaview Technologies\Downloads\download.xlsx")
+upload_btn.send_keys(file_path)
 # if the locator has input tag with type attribute = file, then we can send the file location using sen_keys method
 # and that will upload the file
 
